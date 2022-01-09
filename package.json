@@ -1,23 +1,33 @@
 {
   "name": "wxml-minifier",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "微信小程序WXML压缩工具",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "ncc build src/index.js -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LeeJim/wxml-minifier.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "minifier",
+    "wxml",
+    "微信小程序",
+    "miniprogram",
+    "wechat"
+  ],
+  "author": "leejimqiu",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/LeeJim/wxml-minifier/issues"
   },
   "homepage": "https://github.com/LeeJim/wxml-minifier#readme",
   "dependencies": {
-    "@leejim/wxml-parser": "^0.1.1"
+    "@leejim/wxml-parser": "^0.1.2"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.33.1"
   }
 }
