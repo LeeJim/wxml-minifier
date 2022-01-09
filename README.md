@@ -7,43 +7,37 @@
 </p>
 
 # wxml-minifier
-微信小程序WXML压缩工具
 
-# 安装
+微信小程序 WXML 压缩工具
+
+## 安装
 
 ```bash
 npm i -D wxml-minifier
 ```
 
-# 使用
+## 使用
 
-- minifier(resource[, options])
+minifier(resource[, options])
 
-基础使用：
+### 基础使用
 
 ```js
-var minifier = require('wxml-minifier')
-var wxmlStr = `
+const minifier = require('wxml-minifier')
+const wxmlStr = `
 <view class="home"         >
 <!-- test -->
 </view>
 `
-var minified = minifier(wxmlStr)
+const minified = minifier(wxmlStr)
 
 console.log(minified) // <view class="home></view>
 ```
 
-# 选项
+## 选项
 
-- whitespace
+ 名称 | 类型 | 默认值 | 作用 
+ -- | -- | -- | --
+whitespace | `Boolean` | `true` | 移除 wxml 多余的空格
+comment | `Boolean` | `true` | 移除所有的注释
 
-    Type: `Boolean`
-    Default: `true`
-    移除WXML多余的空格
-
-- comment
-    Type: `Boolean`
-    Default: `true`
-    移除所有的注释
-
-- 更多
