@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "ncc build src/index.js -o dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest && jest-coverage-badges"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,8 @@
     "@leejim/wxml-parser": "^0.1.2"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.33.1"
+    "@vercel/ncc": "^0.33.1",
+    "jest": "^27.4.7",
+    "jest-coverage-badges": "^1.1.2"
   }
 }

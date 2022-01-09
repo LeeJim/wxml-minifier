@@ -4,6 +4,7 @@
     <a><img alt="npm" src="https://img.shields.io/npm/v/wxml-minifier"></a>
     <a><img alt="npm" src="https://img.shields.io/npm/dm/wxml-minifier"></a>
     <a><img alt="NPM" src="https://img.shields.io/npm/l/wxml-minifier"></a>
+    <a><img alt="coverage" src="./coverage/badge-lines.svg"></a>
 </p>
 
 # wxml-minifier
@@ -36,8 +37,8 @@ console.log(minified) // <view class="home></view>
 
 ## 选项
 
- 名称 | 类型 | 默认值 | 作用 
- -- | -- | -- | --
+ 名称 | 类型 | 默认值 | 功能
+ :-- | :-- | :-- | :--
 whitespace | `Boolean` | `true` | 移除 wxml 多余的空格
 comment | `Boolean` | `true` | 移除所有的注释
 

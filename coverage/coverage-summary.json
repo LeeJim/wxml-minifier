@@ -1,0 +1,3 @@
+{"total": {"lines":{"total":285,"covered":278,"skipped":0,"pct":97.54},"statements":{"total":285,"covered":278,"skipped":0,"pct":97.54},"functions":{"total":29,"covered":29,"skipped":0,"pct":100},"branches":{"total":73,"covered":67,"skipped":0,"pct":91.78},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":"Unknown"}}
+,"/Users/leejim/Dev/wxml-minifier/dist/index.js": {"lines":{"total":285,"covered":278,"skipped":0,"pct":97.54},"functions":{"total":29,"covered":29,"skipped":0,"pct":100},"statements":{"total":285,"covered":278,"skipped":0,"pct":97.54},"branches":{"total":73,"covered":67,"skipped":0,"pct":91.78}}
+}
