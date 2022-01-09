@@ -214,6 +214,10 @@ let minifier = function(source, options) {
         },
         onclosetag(tagname) {
             str += `</${tagname}>`;
+        },
+        onwxs(wxs) {
+            console.log(wxs);
+            str += wxs;
         }
     });
     parser.write(source);
