@@ -28,6 +28,10 @@ class WXMLParser {
         return this.inputs[this.pos];
     }
 
+    getNextString(len) {
+        return this.inputs.substr(this.pos, len)
+    }
+
     startWiths(str) {
         return this.inputs.substr(this.pos, str.length) === str;
     }
@@ -42,9 +46,18 @@ class WXMLParser {
         return this.inputs[this.pos++];
     }
 
-    consumeWhile(matchFunc) {
+    consumeCharIgnoreWhitespace() {
+        const text = this.consumeWhitespace()
+        // if (text) {
+        //     handlerCompany.call(this, 'text', text);
+        // }
+        return this.inputs[this.pos++];
+    }
+
+    consumeWhile(matchFunc, len) {
         let result = '';
-        while (!this.isEOF() && matchFunc(this.getNextChar())) {
+
+        while (!this.isEOF() && matchFunc(len ? this.getNextString(len) : this.getNextChar())) {
             result += this.consumeChar();
         }
         return result;
@@ -129,17 +142,17 @@ class WXMLParser {
         }
 
         if (tagName === 'wxs') {
-            const wxs = this.consumeWhile(char => char !== '<');
+            const wxs = this.consumeWhile(str => str !== '</wxs', 5);
             handlerCompany.call(this, 'wxs', wxs);
         } else {
             this.parseNodes();
         }
 
-        assert.ok(this.consumeChar() === '<');
-        assert.ok(this.consumeChar() === '/');
+        assert.ok(this.consumeCharIgnoreWhitespace() === '<');
+        assert.ok(this.consumeCharIgnoreWhitespace() === '/');
         let closeTagName = this.parseTagName();
         handlerCompany.call(this, 'closetag', closeTagName, false);
-        assert.ok(this.consumeChar() === '>');
+        assert.ok(this.consumeCharIgnoreWhitespace() === '>');
     }
 
     parseTagName() {
@@ -216,7 +229,6 @@ let minifier = function(source, options) {
             str += `</${tagname}>`;
         },
         onwxs(wxs) {
-            console.log(wxs);
             str += wxs;
         }
     });
