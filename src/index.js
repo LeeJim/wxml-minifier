@@ -12,7 +12,7 @@ let minifier = function(source, options) {
     options = Object.assign({}, defaultConfig, options);
     var parser = new WXMLParser({
         onopentag(name, attribs, isSelfClosing) {
-            let attrStr = Object.entries(attribs).map(([key, val]) => val === '' ? key : `${key}="${val.replace(/"/g, '\'')}"`).join(' ');
+            let attrStr = attribs.map(item => typeof item === 'string' ? item : `${item.key}="${item.value.replace(/"/g, '\'')}"`).join(' ');
             let hasAttr = attrStr.length > 0;
             str += `<${name}${hasAttr || isSelfClosing ? ' ' : ''}${attrStr}${isSelfClosing ? '/' : ''}>`;
         },
