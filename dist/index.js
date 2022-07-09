@@ -96,7 +96,7 @@ class WXMLParser {
     parseTemplate() {
         assert.ok(this.consumeChar() === '{');
         assert.ok(this.consumeChar() === '{');
-        let template = this.consumeWhile((char) => char !== '}');
+        let template = this.consumeWhile((chars) => chars !== '}}', 2);
         handlerCompany.call(this, 'template', template);
         assert.ok(this.consumeChar() === '}');
         assert.ok(this.consumeChar() === '}');
@@ -156,26 +156,26 @@ class WXMLParser {
     }
 
     parseTagName() {
-        return this.consumeWhile((char) => /[a-zA-Z-]/.test(char));
+        return this.consumeWhile((char) => /[\w-]/.test(char));
     }
 
     parseAttrs() {
         this.consumeWhitespace();
-        let attrs = {};
+        let attrs = [];
         while (/[^/>]/.test(this.getNextChar())) {
             let key = this.consumeWhile((char) => /[^=/>\s]/.test(char));
             this.consumeWhitespace();
             if (this.getNextChar() !== '=') {
-                attrs[key] = '';
+                attrs.push(key);
                 continue;
             }
             assert.ok(this.consumeChar() === '=');
             this.consumeWhitespace();
             let quoteMark = this.consumeChar(); // single or double quote marks
             assert.ok(/['"]/.test(quoteMark));
-            let val = this.consumeWhile((char) => char !== quoteMark);
+            let value = this.consumeWhile((char) => char !== quoteMark);
             assert.ok(this.consumeChar() === quoteMark);
-            attrs[key] = val;
+            attrs.push({ key, value })
             this.consumeWhitespace();
         }
         return attrs;
@@ -204,7 +204,7 @@ let minifier = function(source, options) {
     options = Object.assign({}, defaultConfig, options);
     var parser = new WXMLParser({
         onopentag(name, attribs, isSelfClosing) {
-            let attrStr = Object.entries(attribs).map(([key, val]) => val === '' ? key : `${key}="${val.replace(/"/g, '\'')}"`).join(' ');
+            let attrStr = attribs.map(item => typeof item === 'string' ? item : `${item.key}="${item.value.replace(/"/g, '\'')}"`).join(' ');
             let hasAttr = attrStr.length > 0;
             str += `<${name}${hasAttr || isSelfClosing ? ' ' : ''}${attrStr}${isSelfClosing ? '/' : ''}>`;
         },

@@ -35,3 +35,14 @@ test('all options is false', () => {
 
     expect(minWxml).toEqual('<view>{{ variable }}</view>')
 })
+
+test('attribute: only key and with empty string', () => {
+    const wxml = `<view disabled name=""></view>`
+    const minWxml = minifier(wxml, {
+        whitespace: false,
+        comment: false
+    })
+    console.log(minWxml);
+
+    expect(minWxml).toEqual('<view disabled name=""></view>')
+})
